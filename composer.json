@@ -1,0 +1,28 @@
+{
+    "name": "viduc/metromposer",
+    "type": "library",
+    "description": "client pour la métrologie composer d'une application",
+    "keywords": ["composer"],
+    "homepage": "https://github.com/viduc",
+    "license": "Apache-2.0",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "Tristan Fleury",
+            "email": "viduc@mail.fr"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5^",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Viduc\\Metromposer\\": "" },
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    }
+}
