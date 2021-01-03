@@ -24,4 +24,6 @@ interface GitInterface
      * @test testClonerLeDepot()
      */
     function clonerLeDepot() : bool;
+
+    function envoyerLeRapport() : void;
 }

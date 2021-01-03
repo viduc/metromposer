@@ -1,12 +1,10 @@
 <?php declare(strict_types=1);
 namespace Viduc\Metromposer\Tests\Installation;
 
-use phpDocumentor\Reflection\Types\Void_;
 use Viduc\Metromposer\Composer\ComposerInterface;
 use Viduc\Metromposer\Configuration\ConfigurationInterface;
 use Viduc\Metromposer\Git\GitInterface;
 use Viduc\Metromposer\Installation\Installation;
-use Viduc\Metromposer\Exception\MetromposerException;
 use Viduc\Metromposer\Installation\MessageInterface;
 
 use PHPUnit\Framework\TestCase;
@@ -27,6 +25,35 @@ class InstallationTest extends TestCase
         $this->git = $this->createMock(GitInterface::class);
         $this->configuration = $this->createMock(ConfigurationInterface::class);
         $this->composer = $this->createMock(ComposerInterface::class);
+
+        $this->installation->setMessage($this->message);
+        $this->installation->setGit($this->git);
+        $this->installation->setConfiguration($this->configuration);
+        $this->installation->setComposer($this->composer);
+    }
+
+    final public function testVerifierInstallation() : void
+    {
+        self::assertIsBool($this->installation->verifierInstallation());
+    }
+
+    final public function testRelancerInstallation() : void
+    {
+        $this->message->method('getQuestion')->will(
+            self::onConsecutiveCalls('test', 'test')
+        );
+        $this->message->method('getReponse')->will(
+            self::onConsecutiveCalls('test', 'oui')
+        );
+        $this->configuration->method('supprimerDossier')->will(
+            self::onConsecutiveCalls(true)
+        );
+        $this->configuration->method('recupererPathApplication')->will(
+            self::onConsecutiveCalls('test', 'test')
+        );
+
+        self::assertNull($this->installation->relancerInstallation());
+        //self::assertNull($this->installation->relancerInstallation());
     }
 
     final public function testDepotGit() : void
@@ -46,33 +73,7 @@ class InstallationTest extends TestCase
         $this->configuration->method('ajouterOuModifierUnParametre')->will(
             self::onConsecutiveCalls(true, true)
         );
-        $this->installation->setMessage($this->message);
-        $this->installation->setGit($this->git);
-        $this->installation->setConfiguration($this->configuration);
         self::assertNull($this->installation->depotGit());
-    }
-
-    final public function testComposerServeur() : void
-    {
-        $this->message->method('getReponse')->will(
-            self::onConsecutiveCalls('toto', 'oui')
-        );
-        $this->installation->setMessage($this->message);
-        $this->configuration->method('ajouterOuModifierUnParametre')->will(
-            self::onConsecutiveCalls(true, true)
-        );
-        $this->installation->setConfiguration($this->configuration);
-        self::assertTrue($this->installation->composerServeur());
-
-        $this->message->method('getQuestion')->willThrowException(
-            new MetromposerException('test')
-        );
-        $this->installation->setMessage($this->message);
-        try {
-            $this->installation->composerServeur();
-        } catch (MetromposerException $ex) {
-            self::assertEquals('test', $ex->getMessage());
-        }
     }
 
     final public function testComposerPhar() : void
@@ -89,10 +90,56 @@ class InstallationTest extends TestCase
         $this->configuration->method('ajouterOuModifierUnParametre')->will(
             self::onConsecutiveCalls(true)
         );
-        $this->installation->setConfiguration($this->configuration);
-        $this->installation->setMessage($this->message);
-        $this->installation->setComposer($this->composer);
         self::assertNull($this->installation->composerPhar());
+    }
+
+    final public function testNomDeLapplication() : void
+    {
+
+        $this->message->method('getReponse')->will(
+            self::onConsecutiveCalls('test')
+        );
+        $this->configuration->method('ajouterOuModifierUnParametre')->will(
+            self::onConsecutiveCalls(true)
+        );
+        self::assertNull($this->installation->nomDeLapplication());
+    }
+
+    final public function testLienDeLapplication() : void
+    {
+        $this->message->method('getReponse')->will(
+            self::onConsecutiveCalls('test')
+        );
+        $this->configuration->method('ajouterOuModifierUnParametre')->will(
+            self::onConsecutiveCalls(true)
+        );
+        self::assertNull($this->installation->lienDeLapplication());
+    }
+
+    final public function testGenererLeRapport() : void
+    {
+        $this->message->method('getReponse')->will(
+            self::onConsecutiveCalls('test', 'oui')
+        );
+        $this->composer->method('genererLaListeDesLibrairiesAmettreAjour')->will(
+            self::onConsecutiveCalls('test')
+        );
+        self::assertNull(
+            $this->installation->genererLeRapport()
+        );
+    }
+
+    final public function testEnvoyerLeRapport() : void
+    {
+        $this->message->method('getReponse')->will(
+            self::onConsecutiveCalls('test', 'oui')
+        );
+        $this->git->method('envoyerLeRapport')->will(
+            self::onConsecutiveCalls(true)
+        );
+        self::assertNull(
+            $this->installation->envoyerLeRapport()
+        );
     }
 
 }

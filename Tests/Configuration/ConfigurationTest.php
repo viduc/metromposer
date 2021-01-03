@@ -89,6 +89,18 @@ class ConfigurationTest extends TestCase
         );
     }
 
+    final public function testRemplacerCaracteresSpeciaux() : void
+    {
+        self::assertEquals(
+            'Mchaine',
+            $this->configuration->remplacerCaracteresSpeciaux('M@cha\'îne')
+        );
+    }
+
+    final public function testEnregistrerLeNomDuServeur() : void
+    {
+        self::assertNull($this->configuration->enregistrerLeNomDuServeur());
+    }
 
 //-------------------------> METHODE INTERNES <------------------------------//
     final private function supprimerFichier() :void
@@ -108,6 +120,5 @@ class ConfigurationTest extends TestCase
         } else {
             fopen(FICHIER, 'ab');
         }
-
     }
 }

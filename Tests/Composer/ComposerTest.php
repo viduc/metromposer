@@ -19,4 +19,11 @@ class ComposerTest extends TestCase
         self::assertCount(7, $this->composer->recupererLesVersions());
     }
 
+    final public function testGenererLaListeDesLibrairiesAmettreAjour() : void
+    {
+        self::assertNull(
+            $this->composer->genererLaListeDesLibrairiesAmettreAjour()
+        );
+    }
+
 }

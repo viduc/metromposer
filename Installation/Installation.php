@@ -45,61 +45,80 @@ class Installation implements InstallationInterface
     }
 
     /**
-     * @throws MetromposerException
      * @codeCoverageIgnore
+     * @throws MetromposerException
      */
     final public function installer() : void
     {
         echo $this->messages->getEntete();
-
+        if ($this->verifierInstallation()) {
+            $this->relancerInstallation();
+        }
         try {
             $this->depotGit();
-            if (!$this->composerServeur()) {
-                $this->composerPhar();
-            }
+            $this->composerPhar();
+            $this->nomDeLapplication();
+            $this->lienDeLapplication();
+            $this->configuration->enregistrerLeNomDuServeur();
+            $this->genererLeRapport();
+            $this->envoyerLeRapport();
+            $this->fin();
         } catch (MetromposerException $ex) {
             $this->messages->afficherErreur($ex->getMessage());
         }
     }
 
     /**
-     * Récupère l'adresse du dépot git et clone le dépôt
-     * @param int $id - l'id du message (pour la boucle)
-     * @throws MetromposerException
+     * vérifie si une installation a déjà été faite
+     * @return bool
+     * @test testVerifierInstallation()
      */
-    final public function depotGit(int $id = 1) : void
+    final public function verifierInstallation() : bool
     {
-        echo $this->messages->getQuestion($id);
-        $serveur = $this->messages->getReponse();
-        $this->git->setUrlServeur($serveur);
-        if (!$this->git->verifierSiLeDepotEstAccessible()) {
-            $this->depotGit(2);
-        }
-        $this->git->clonerLeDepot();
-        $this->configuration->ajouterOuModifierUnParametre('git', $serveur);
+        return is_dir(
+            $this->configuration->recupererPathApplication()
+            . '/metromposer');
     }
 
     /**
-     * Validation de l'installation du composer en mode serveur
-     * @return bool
+     * Relance l'installation en supprimant le dossier metromposer
      * @throws MetromposerException
+     * @test testRelancerInstallation()
      */
-    final public function composerServeur(): bool
+    final public function relancerInstallation() : void
     {
-        echo $this->messages->getQuestion(0);
+        echo $this->messages->getQuestion('relancerInstallation');
         $reponse = $this->messages->getReponse();
         if ($reponse !== 'oui' && $reponse !== 'non') {
-            return $this->composerServeur();
+            $this->relancerInstallation();
         }
-        if ($reponse === 'oui') {
-            $this->configuration->ajouterOuModifierUnParametre(
-                'composer',
-                'serveur'
-            );
-             return true;
+        // @codeCoverageIgnoreStart
+        if ($reponse === 'non') {
+            exit();
         }
+        // @codeCoverageIgnoreEnd
+        $this->configuration->supprimerDossier(
+            $this->configuration->recupererPathApplication(). '/metromposer'
+        );
+    }
 
-        return false;
+    /**
+     * Récupère l'adresse du dépot git et clone le dépôt
+     * @param bool error - détermine si on a eu une erreur lors de la
+     * récupération du dépôt. Si vraie message git_error
+     * @throws MetromposerException
+     */
+    final public function depotGit(bool $error = false) : void
+    {
+        $message =  $error ? 'git_error' : 'git';
+        echo $this->messages->getQuestion($message);
+        $serveur = $this->messages->getReponse();
+        $this->git->setUrlServeur($serveur);
+        if (!$this->git->verifierSiLeDepotEstAccessible()) {
+            $this->depotGit(true);
+        }
+        $this->git->clonerLeDepot();
+        $this->configuration->ajouterOuModifierUnParametre('git', $serveur);
     }
 
     /**
@@ -109,7 +128,7 @@ class Installation implements InstallationInterface
      */
     final public function composerPhar() : void
     {
-        echo $this->messages->getQuestion(3);
+        echo $this->messages->getQuestion('composer');
         $versions = $this->composer->recupererLesVersions();
         $reponse = $this->messages->getReponse();
         if (array_key_exists(
@@ -123,5 +142,80 @@ class Installation implements InstallationInterface
         } else {
             $this->composerPhar();
         }
+    }
+
+    /**
+     * Enregistre le nom de l'application
+     * @throws MetromposerException
+     * @test testNomDeLapplication()
+     */
+    final public function nomDeLapplication() : void
+    {
+        echo $this->messages->getQuestion('application');
+        $this->configuration->ajouterOuModifierUnParametre(
+            'application',
+            $this->configuration->remplacerCaracteresSpeciaux(
+                $this->messages->getReponse()
+            )
+        );
+    }
+
+    /**
+     * Enregistre l'url de l'application
+     * @throws MetromposerException
+     * @test testLienDeLapplication()
+     */
+    final public function lienDeLapplication() : void
+    {
+        echo $this->messages->getQuestion('url');
+        $this->configuration->ajouterOuModifierUnParametre(
+            'url',
+            $this->messages->getReponse()
+        );
+    }
+
+    /**
+     * Génère le rapport html
+     * @throws MetromposerException
+     * @test testGenererLeRapport()
+     */
+    final public function genererLeRapport() : void
+    {
+        echo $this->messages->getQuestion('rapport');
+        $reponse = $this->messages->getReponse();
+        if ($reponse !== 'oui') {
+            $this->genererLeRapport();
+        }
+        if ($reponse === 'oui') {
+            $this->composer->genererLaListeDesLibrairiesAmettreAjour();
+        }
+    }
+
+    /**
+     * Envoie le rapport sur le dépôt git
+     * @throws MetromposerException
+     * @test testEnvoyerLeRapport();
+     */
+    final public function envoyerLeRapport() : void
+    {
+        echo $this->messages->getQuestion('push');
+        $reponse = $this->messages->getReponse();
+        if ($reponse !== 'oui') {
+            $this->envoyerLeRapport();
+        }
+        if ($reponse === 'oui') {
+            $this->git->envoyerLeRapport();
+        }
+    }
+
+    /**
+     * FIn de l'installation
+     * @throws MetromposerException
+     * @codeCoverageIgnore
+     */
+    final public function fin() : void
+    {
+        echo $this->messages->getQuestion('fin');
+        exit();
     }
 }

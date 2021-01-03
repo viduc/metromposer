@@ -3,6 +3,8 @@
 namespace Viduc\Metromposer\Configuration;
 
 use JsonException;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Viduc\Metromposer\Exception\MetromposerException;
 
 require_once('ConfigurationInterface.php');
@@ -53,7 +55,6 @@ class Configuration implements ConfigurationInterface
         string $value
     ): bool {
         $this->creerLeFichier();
-
         try {
             $config = json_decode(
                 file_get_contents($this->fichier),
@@ -173,5 +174,60 @@ class Configuration implements ConfigurationInterface
                 'Erreur JSON lors de la lecture du fichier composer.json'
             );
         }
+    }
+
+    /**
+     * Enregistre le nom du serveur
+     * @throws MetromposerException
+     * @test testEnregistrerLeNomDuServeur()
+     */
+    final public function enregistrerLeNomDuServeur() : void
+    {
+        $this->ajouterOuModifierUnParametre('serveur', gethostname());
+    }
+
+    /**
+     * Supprime un dossier et son contenu
+     * @param string $path
+     * @codeCoverageIgnore
+     */
+    final public function supprimerDossier(string $path) : void
+    {
+        $it = new RecursiveDirectoryIterator(
+            $path,
+            RecursiveDirectoryIterator::SKIP_DOTS
+        );
+        $files = new RecursiveIteratorIterator(
+            $it,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach($files as $file) {
+            if ($file->isDir()){
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+        rmdir($path);
+    }
+
+    /**
+     * Remplace les caractères spéciaux d'une chaine
+     * @param string $chaine
+     * @return string
+     * @test testRemplacerCaracteresSpeciaux()
+     */
+    final public function remplacerCaracteresSpeciaux(string $chaine) : string
+    {
+        setlocale(LC_ALL, 'fr_FR');
+        $chaine = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $chaine);
+        $chaine = preg_replace('#[^0-9a-z]+#i', '', $chaine);
+        while(strpos($chaine, '--') !== false)
+        {
+            $chaine = str_replace('--', '-', $chaine);
+        }
+        $chaine = trim($chaine, '');
+
+        return $chaine;
     }
 }

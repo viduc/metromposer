@@ -21,12 +21,12 @@ interface MessageInterface
 
     /**
      * Récupère une question par son if
-     * @param int $id - id de la question
+     * @param string $name - le nom du message
      * @return string
      * @throws MetromposerException
      * @test testGetQuestion()
      */
-    function getQuestion(int $id): string;
+    function getQuestion(string $name): string;
 
     /**
      * @return string

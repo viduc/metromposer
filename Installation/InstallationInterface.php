@@ -12,18 +12,26 @@ interface InstallationInterface
     function installer() : void;
 
     /**
-     * Récupère l'adresse du dépot git et clone le dépôt
-     * @param int $id - l'id du message (pour la boucle)
-     * @throws MetromposerException
+     * vérifie si une installation a déjà été faite
+     * @return bool
+     * @test testVerifierInstallation()
      */
-    function depotGit(int $id) : void;
+    function verifierInstallation() : bool;
 
     /**
-     * Validation de l'installation du composer en mode serveur
-     * @return bool
+     * Relance l'installation en supprimant le dossier metromposer
+     * @throws MetromposerException
+     * @test testRelancerInstallation()
+     */
+    function relancerInstallation() : void;
+
+    /**
+     * Récupère l'adresse du dépot git et clone le dépôt
+     * @param bool error - détermine si on a eu une erreur lors de la
+     * récupération du dépôt. Si vraie message git_error
      * @throws MetromposerException
      */
-    function composerServeur(): bool;
+    function depotGit(bool $error) : void;
 
     /**
      * Enregsitre la version du fichier phar à utiliser
@@ -31,4 +39,38 @@ interface InstallationInterface
      * @test testComposerPhar()
      */
     function composerPhar() : void;
+
+    /**
+     * Enregistre le nom de l'application
+     * @throws MetromposerException
+     * @test testNomDeLapplication()
+     */
+    function nomDeLapplication() : void;
+
+    /**
+     * Enregistre l'url de l'application
+     * @throws MetromposerException
+     * @test testLienDeLapplication()
+     */
+    function lienDeLapplication() : void;
+
+    /**
+     * Génère le rapport html
+     * @throws MetromposerException
+     * @test testGenererLeRapport()
+     */
+    function genererLeRapport() : void;
+
+    /**
+     * Envoie le rapport sur le dépôt git
+     * @throws MetromposerException
+     * @test testEnvoyerLeRapport();
+     */
+    function envoyerLeRapport() : void;
+
+    /**
+     * FIn de l'installation
+     * @throws MetromposerException
+     * @codeCoverageIgnore
+     */
 }

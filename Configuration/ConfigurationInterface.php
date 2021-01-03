@@ -40,6 +40,29 @@ interface ConfigurationInterface
      */
     function recupererPathLibrairie() : string;
 
+    /**
+     * récupère la version de la librairie
+     * @return string
+     * @throws MetromposerException
+     * @test testRecupererLaVersionDeLaLibrairie()
+     */
     function recupererLaVersionDeLaLibrairie() : string;
+
+    /**
+     * Enregistre le nom du serveur
+     * @throws MetromposerException
+     * @test testEnregistrerLeNomDuServeur()
+     */
+    function enregistrerLeNomDuServeur() : void;
+
+    function supprimerDossier(string $path) : void;
+
+    /**
+     * Remplace les caractères spéciaux d'une chaine
+     * @param string $chaine
+     * @return string
+     * @test testRemplacerCaracteresSpeciaux()
+     */
+    function remplacerCaracteresSpeciaux(string $chaine) : string;
 
 }

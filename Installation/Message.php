@@ -32,25 +32,39 @@ class Message implements MessageInterface
 
     final public function __construct()
     {
-        $this->questions[0] = "Composer est il installé sur votre serveur et " .
-        "accessible depuis la commande 'composer' ? (Oui/non) | :q pour annuler";
-        $this->questions[1] = "Renseignez l'adresse de votre dépôt git " .
+        $this->questions['git'] = "Renseignez l'adresse de votre dépôt git " .
             "(par ex: ssh://login@serveugit.fr/depot.git) ou :q pour quitter";
-        $this->questions[2] = "Votre dépôt git n'est pas accessible, renseignez" .
-            " une adresse valide (par ex: ssh://login@serveugit.fr/depot.git)" .
-            " ou entrez :q pour quitter";
+        $this->questions['git_error'] = "Votre dépôt git n'est pas accessible," .
+            " renseignez une adresse valide (par ex: " .
+            "ssh://login@serveugit.fr/depot.git) ou entrez :q pour quitter";
         $composer = new Composer();
-        $this->questions[3] = "Quelle version du fichier composer.phar " .
+        $this->questions['composer'] = "Quelle version du fichier composer.phar " .
             "souhaitez vous utiliser ? Entrez l'id correspondant à la version" .
             " désirée : (:q pour quitter)\n | ID  | VERSION |\n";
         foreach ($composer->recupererLesVersions() as $key => $value) {
-            $this->questions[3] .= " | [" . $key . "] | " . $value;
+            $this->questions['composer'] .= " | [" . $key . "] | " . $value;
             $valueLength = strlen($value);
             for ($i=0; $i <=(7-$valueLength); $i++) {
-                $this->questions[3] .= ' ';
+                $this->questions['composer'] .= ' ';
             }
-            $this->questions[3] .="|\n";
+            $this->questions['composer'] .="|\n";
         }
+        $this->questions['relancerInstallation'] = "Une installation de la " .
+        "librairie a été détectée. \nSouhaitez vous supprimer cette " .
+        "installation et relancer le processus ? (oui pour supprimer et " .
+        "relancer, non pour quitter) \n";
+        $this->questions['application'] = "Quelle est le nom de votre " .
+            "application? \nCe nom ne doit comporter ni caractères spéciaux " .
+            "ni espace. q: pour quitter";
+        $this->questions['url'] = "Quel est l'url de votre application? \n" .
+            "L'url doit être au format http://monurl" .
+            " q: pour quitter";
+        $this->questions['rapport'] = "Voulez vous générer un rapport composer?" .
+            "\nOui pour générer le rapport, :q pour quitter";
+        $this->questions['push'] = "Voulez vous envoyer le rapport composer" .
+            " sur votre dépôt GIT ?" .
+            "\nOui pour envoyer le rapport, :q pour quitter";
+        $this->questions['fin'] = "L'installation de la librairie est terminée";
     }
 
     /**
@@ -75,20 +89,20 @@ class Message implements MessageInterface
 
     /**
      * Récupère une question par son if
-     * @param int $id - id de la question
+     * @param string $name - le nom du message
      * @return string
      * @throws MetromposerException
      * @test testGetQuestion()
      */
-    final public function getQuestion(int $id): string
+    final public function getQuestion(string $name): string
     {
-        if (array_key_exists($id, $this->questions)) {
+        if (array_key_exists($name, $this->questions)) {
             $question = COULEUR_QUESTION;
-            $question .= $this->questions[$id];
+            $question .= $this->questions[$name];
             $question .= FIN_COULEUR_QUESTION;
             return  $question;
         }
-        throw new MetromposerException("L'id " . $id . " n'existe pas");
+        throw new MetromposerException("Le message " . $name . " n'existe pas");
     }
 
     /**

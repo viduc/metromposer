@@ -4,6 +4,7 @@ namespace Viduc\Metromposer\Git;
 
 use Viduc\Metromposer\Configuration\Configuration;
 use Viduc\Metromposer\Configuration\ConfigurationInterface;
+use Viduc\Metromposer\Exception\MetromposerException;
 
 class Git implements GitInterface
 {
@@ -59,5 +60,20 @@ class Git implements GitInterface
         exec($commande, $output, $retval);
 
         return $retval === 0;
+    }
+
+    /**
+     * Envoie les modifications sur le dépôt git
+     * @throws MetromposerException
+     * @codeCoverageIgnore
+     */
+    final public function envoyerLeRapport() : void
+    {
+        $commande = 'cd ' . $this->configuration->recupererPathApplication() ;
+        $commande .= '/metromposer; git add ';
+        $commande .= $this->configuration->recupereUnParametre('application');
+        $commande .= '.html; ';
+        $commande .= 'git commit  -m "maj"; git push 2> /dev/null';
+        exec($commande, $output, $retval);
     }
 }
