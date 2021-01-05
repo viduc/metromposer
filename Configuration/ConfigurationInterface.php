@@ -55,6 +55,8 @@ interface ConfigurationInterface
      */
     function enregistrerLeNomDuServeur() : void;
 
+    function dateDinstallation() : void;
+
     function supprimerDossier(string $path) : void;
 
     /**

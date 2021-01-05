@@ -187,6 +187,19 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Enregistre la date de l'installation
+     * @throws MetromposerException
+     * @test testDateDinstallation()
+     */
+    final public function dateDinstallation() : void
+    {
+        $this->ajouterOuModifierUnParametre(
+            'dateInstallation',
+            date("d-m-Y H:i:s")
+        );
+    }
+
+    /**
      * Supprime un dossier et son contenu
      * @param string $path
      * @codeCoverageIgnore

@@ -102,6 +102,11 @@ class ConfigurationTest extends TestCase
         self::assertNull($this->configuration->enregistrerLeNomDuServeur());
     }
 
+    final public function testDateDinstallation() : void
+    {
+        self::assertNull($this->configuration->dateDinstallation());
+    }
+
 //-------------------------> METHODE INTERNES <------------------------------//
     final private function supprimerFichier() :void
     {

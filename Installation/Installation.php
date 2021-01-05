@@ -60,6 +60,7 @@ class Installation implements InstallationInterface
             $this->nomDeLapplication();
             $this->lienDeLapplication();
             $this->configuration->enregistrerLeNomDuServeur();
+            $this->configuration->dateDinstallation();
             $this->genererLeRapport();
             $this->envoyerLeRapport();
             $this->fin();

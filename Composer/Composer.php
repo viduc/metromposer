@@ -79,6 +79,8 @@ class Composer implements ComposerInterface
         $html .= $this->configuration->recupererLaVersionDeLaLibrairie();
         $html .= ']</h4><p class="card-text">Serveur: ';
         $html .= $this->configuration->recupereUnParametre('serveur') . '</p>';
+        $html .= '</h4><p class="card-text">Date du rapport: ';
+        $html .= date("d/m/Y H:i:s") . '</p>';
         $html .= '<a href="';
         $html .= $this->configuration->recupereUnParametre('url');
         $html .= '" class="card-link text-danger">Lien vers l\'application</a>';
@@ -125,8 +127,12 @@ class Composer implements ComposerInterface
                 $retour .= '<td>MAJ</td>';
             }
             $retour .= '<td>' . $tabLigne[0] . '</td>';
-            $retour .= '<td>' . $tabLigne[1] . ' -> ' . $tabLigne[3] . '</td>';
-            $retour .= '<td>' . $tabLigne[4] . '</td>';
+            $retour .= '<td style="width: 10%">' . $tabLigne[1] . ' -> ' . $tabLigne[3] . '</td>';
+            $commentaire = '';
+            for ($i = 4, $iMax = count($tabLigne); $i < $iMax; $i++) {
+                $commentaire .= $tabLigne[$i] . ' ';
+            }
+            $retour .= '<td>' . $commentaire . '</td>';
             $retour .= '</tr>';
         } /*else {
             $retour .= '<tr>';
