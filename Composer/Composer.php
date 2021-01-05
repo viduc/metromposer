@@ -2,7 +2,6 @@
 
 namespace Viduc\Metromposer\Composer;
 
-use JsonException;
 use Viduc\Metromposer\Configuration\Configuration;
 use Viduc\Metromposer\Exception\MetromposerException;
 
@@ -51,8 +50,8 @@ class Composer implements ComposerInterface
     {
         $output=null;
         $retval=null;
-        //$commande = 'cd ' . $this->configuration->recupererPathApplication() ;
-        $commande = 'cd /var/www/blop; ';
+        $commande = 'cd ' . $this->configuration->recupererPathApplication() ;
+        //$commande = 'cd /var/www/blop; ';
         $commande .= 'php -d memory_limit=-1 ';
         $commande .= $this->configuration->recupererPathLibrairie();
         $commande .= '/Composer/composer-';

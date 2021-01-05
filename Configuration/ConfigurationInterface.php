@@ -55,8 +55,18 @@ interface ConfigurationInterface
      */
     function enregistrerLeNomDuServeur() : void;
 
+    /**
+     * Enregistre la date de l'installation
+     * @throws MetromposerException
+     * @test testDateDinstallation()
+     */
     function dateDinstallation() : void;
 
+    /**
+     * Supprime un dossier et son contenu
+     * @param string $path
+     * @codeCoverageIgnore
+     */
     function supprimerDossier(string $path) : void;
 
     /**

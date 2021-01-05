@@ -1,7 +1,8 @@
 <?php
-namespace Viduc\Metromposer\Installation;
+namespace Viduc\Metromposer;
 
 use Viduc\Metromposer\Exception\MetromposerException;
+use Viduc\Metromposer\Installation\Installation;
 
 require_once('Installation/InstallationInterface.php');
 require_once('Installation/Installation.php');
