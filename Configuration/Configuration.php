@@ -1,5 +1,9 @@
-<?php
-
+<?php declare(strict_types=1);
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
 namespace Viduc\Metromposer\Configuration;
 
 use JsonException;
@@ -13,6 +17,11 @@ class Configuration implements ConfigurationInterface
 {
     private string $fichier;
 
+    /**
+     * Constructeur de la class
+     * Configuration constructor.
+     * @param string|null $fichier
+     */
     final public function __construct(string $fichier = null)
     {
         $this->fichier = $this->recupererPathApplication()
@@ -22,6 +31,11 @@ class Configuration implements ConfigurationInterface
         }
     }
 
+    /**
+     * Créer le fichier de configuration
+     * @throws MetromposerException
+     * @test testCreerLeFichier()
+     */
     final public function creerLeFichier() : void
     {
         if (!file_exists($this->fichier)) {
@@ -36,9 +50,11 @@ class Configuration implements ConfigurationInterface
                         JSON_THROW_ON_ERROR
                     )
                 );
+            // @codeCoverageIgnoreStart
             } catch (JsonException $e) {
                 throw new MetromposerException($e->getMessage());
             }
+            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -46,14 +62,14 @@ class Configuration implements ConfigurationInterface
      * Ajout ou modifie un paramètre existant dans le fichier config
      * @param string $parametre - le nom du paramètre
      * @param string $value - la valeur du paramètre
-     * @return bool
+     * @return void
      * @throws MetromposerException
      * @test testAjouterOuModifierUnParametre()
      */
     final public function ajouterOuModifierUnParametre(
         string $parametre,
         string $value
-    ): bool {
+    ): void {
         $this->creerLeFichier();
         try {
             $config = json_decode(
@@ -63,7 +79,7 @@ class Configuration implements ConfigurationInterface
                 JSON_THROW_ON_ERROR
             );
             $config->$parametre = $value;
-            return file_put_contents(
+            file_put_contents(
                 $this->fichier,
                 json_encode($config, JSON_THROW_ON_ERROR)
             );
@@ -164,11 +180,11 @@ class Configuration implements ConfigurationInterface
             if (isset($json->version)) {
                 return $json->version;
             }
-
+            // @codeCoverageIgnoreStart
             throw new MetromposerException(
                 'La version de la librairie n\' existe pas'
             );
-
+            // @codeCoverageIgnoreEnd
         } catch (JsonException $e) {
             throw new MetromposerException(
                 'Erreur JSON lors de la lecture du fichier composer.json'

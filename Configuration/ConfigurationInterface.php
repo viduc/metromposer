@@ -1,21 +1,31 @@
-<?php
+<?php declare(strict_types=1);
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
 namespace Viduc\Metromposer\Configuration;
 
 use Viduc\Metromposer\Exception\MetromposerException;
 
 interface ConfigurationInterface
 {
+    /**
+     * Créer le fichier de configuration
+     * @throws MetromposerException
+     * @test testCreerLeFichier()
+     */
     function creerLeFichier() : void;
 
     /**
      * Ajout ou modifie un paramètre existant dans le fichier config
      * @param string $parametre - le nom du paramètre
      * @param string $value - la valeur du paramètre
-     * @return bool
+     * @return void
      * @throws MetromposerException
      * @test testAjouterOuModifierUnParametre()
      */
-    function ajouterOuModifierUnParametre(string $parametre, string $value) : bool;
+    function ajouterOuModifierUnParametre(string $parametre, string $value) : void;
 
     /**
      * Récupère un paramètre depuis le fichier de config

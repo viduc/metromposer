@@ -1,4 +1,9 @@
 <?php declare(strict_types=1);
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
 namespace Viduc\Metromposer\Tests\Configuration;
 
 use PHPUnit\Framework\TestCase;
@@ -19,10 +24,16 @@ class ConfigurationTest extends TestCase
         $this->supprimerFichier();
     }
 
+    final public function testCreerLeFichier() : void
+    {
+        self::assertFileDoesNotExist(FICHIER);
+        $this->configuration->creerLeFichier();
+        self::assertFileExists(FICHIER);
+    }
+
     final public function testAjouterOuModifierUnParametre() : void
     {
-        $this->creerFichier();
-        self::assertTrue($this->configuration->ajouterOuModifierUnParametre(
+        self::assertNull($this->configuration->ajouterOuModifierUnParametre(
             'version',
             '0.0.2'
         ));
@@ -87,14 +98,14 @@ class ConfigurationTest extends TestCase
         self::assertIsString(
             $this->configuration->recupererLaVersionDeLaLibrairie()
         );
-    }
-
-    final public function testRemplacerCaracteresSpeciaux() : void
-    {
-        self::assertEquals(
-            'Mchaine',
-            $this->configuration->remplacerCaracteresSpeciaux('M@cha\'îne')
-        );
+        try {
+            $this->configuration->recupererLaVersionDeLaLibrairie();
+        } catch (MetromposerException $ex) {
+            self::assertEquals(
+                'Erreur JSON lors de la lecture du fichier composer.json',
+                $ex->getMessage()
+            );
+        }
     }
 
     final public function testEnregistrerLeNomDuServeur() : void
@@ -105,6 +116,14 @@ class ConfigurationTest extends TestCase
     final public function testDateDinstallation() : void
     {
         self::assertNull($this->configuration->dateDinstallation());
+    }
+
+    final public function testRemplacerCaracteresSpeciaux() : void
+    {
+        self::assertEquals(
+            'Mchaine',
+            $this->configuration->remplacerCaracteresSpeciaux('M@cha\'îne')
+        );
     }
 
 //-------------------------> METHODE INTERNES <------------------------------//
@@ -120,7 +139,7 @@ class ConfigurationTest extends TestCase
         if (!$vide) {
             file_put_contents(
                 FICHIER,
-                json_encode(['version' => '0.0.1'], JSON_THROW_ON_ERROR)
+                json_encode(['test' => '0.0.1'], JSON_THROW_ON_ERROR)
             );
         } else {
             fopen(FICHIER, 'ab');
