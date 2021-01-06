@@ -1,4 +1,9 @@
 <?php
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
 namespace Viduc\Metromposer\Composer;
 
 use Viduc\Metromposer\Exception\MetromposerException;
