@@ -17,4 +17,12 @@ interface ComposerInterface
      * @throws MetromposerException
      */
     function genererLaListeDesLibrairiesAmettreAjour() : void;
+
+    /**
+     * Formate une ligne
+     * @param string $ligne
+     * @return string
+     * @test testFormaterLigneComposer()
+     */
+    function formaterLigneComposer(string $ligne) : string;
 }

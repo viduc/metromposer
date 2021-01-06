@@ -26,4 +26,14 @@ class ComposerTest extends TestCase
         );
     }
 
+    final public function testFormaterLigneComposer() : void
+    {
+        $chaine = 'machaine/machaine test   test test';
+        $attendu = '<tr><td>MAJ</td><td>machaine/machaine</td><td style="width:'
+            . ' 10%">test -> test</td><td></td></tr>';
+        self::assertEquals(
+            $attendu,
+            $this->composer->formaterLigneComposer($chaine)
+        );
+    }
 }

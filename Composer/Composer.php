@@ -110,6 +110,7 @@ class Composer implements ComposerInterface
      * Formate une ligne
      * @param string $ligne
      * @return string
+     * @test testFormaterLigneComposer()
      */
     final public function formaterLigneComposer(string $ligne) : string
     {
