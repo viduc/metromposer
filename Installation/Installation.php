@@ -1,4 +1,9 @@
-<?php
+<?php declare(strict_types=1);
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
 namespace Viduc\Metromposer\Installation;
 
 use Viduc\Metromposer\Configuration\Configuration;
@@ -16,26 +21,46 @@ class Installation implements InstallationInterface
     private ConfigurationInterface $configuration;
     private ComposerInterface $composer;
 
+    /**
+     * @param MessageInterface $message
+     * @codeCoverageIgnore
+     */
     final public function setMessage(MessageInterface $message) : void
     {
         $this->messages = $message;
     }
 
+    /**
+     * @param GitInterface $git
+     * @codeCoverageIgnore
+     */
     final public function setGit(GitInterface $git) : void
     {
         $this->git = $git;
     }
 
+    /**
+     * @param ConfigurationInterface $config
+     * @codeCoverageIgnore
+     */
     final public function setConfiguration(ConfigurationInterface $config) : void
     {
         $this->configuration = $config;
     }
 
+    /**
+     * @param ComposerInterface $composer
+     * @codeCoverageIgnore
+     */
     final public function setComposer(ComposerInterface $composer) : void
     {
         $this->composer = $composer;
     }
 
+    /**
+     * Installation constructor.
+     * @codeCoverageIgnore
+     */
     final public function __construct()
     {
         $this->messages = new Message();
@@ -78,7 +103,8 @@ class Installation implements InstallationInterface
     {
         return is_dir(
             $this->configuration->recupererPathApplication()
-            . '/metromposer');
+            . '/metromposer'
+        );
     }
 
     /**
@@ -108,6 +134,7 @@ class Installation implements InstallationInterface
      * @param bool error - détermine si on a eu une erreur lors de la
      * récupération du dépôt. Si vraie message git_error
      * @throws MetromposerException
+     * @test testDepotGit()
      */
     final public function depotGit(bool $error = false) : void
     {
