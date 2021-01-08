@@ -30,7 +30,7 @@ class Composer implements ComposerInterface
         $versions = [];
         $files = scandir(
             $this->configuration->recupererPathLibrairie()
-            . '/Composer'
+            . 'Composer'
         );
         foreach ($files as $file) {
             if (strpos($file, 'composer-') === 0) {
@@ -59,7 +59,7 @@ class Composer implements ComposerInterface
         //$commande = 'cd /var/www/blop; ';
         $commande .= 'php -d memory_limit=-1 ';
         $commande .= $this->configuration->recupererPathLibrairie();
-        $commande .= '/Composer/composer-';
+        $commande .= 'Composer/composer-';
         $commande .= $this->configuration->recupereUnParametre('composer');
         $commande .= '.phar outdated 2> /dev/null';
 
@@ -105,7 +105,7 @@ class Composer implements ComposerInterface
         $html .= '</body></html>';
         file_put_contents(
             $this->configuration->recupererPathApplication() .
-            '/metromposer/' .
+            'metromposer/' .
             $this->configuration->recupereUnParametre('application') . '.html',
             $html
         );

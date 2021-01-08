@@ -153,8 +153,8 @@ class Configuration implements ConfigurationInterface
     final public function recupererPathLibrairie() : string
     {
         $base = $this->recupererPathApplication();
-        if (is_dir($base . '/vendor/Viduc/Metromposer')) {
-            return $base . '/vendor/Viduc/Metromposer';
+        if (is_dir($base . 'vendor/Viduc/Metromposer')) {
+            return $base . 'vendor/Viduc/Metromposer';
         }
         return $base;
     }
