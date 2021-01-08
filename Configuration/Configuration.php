@@ -128,14 +128,19 @@ class Configuration implements ConfigurationInterface
      */
     final public function recupererPathApplication() : string
     {
+        $search = 'Viduc/Metromposer';
         $output=null;
         $retval=null;
         $commande = 'pwd 2> /dev/null';
         exec($commande, $output, $retval);
+        if (strpos($output[0], $search) === false) {
+            $search = 'Metromposer';
+        }
+
         $vendor = substr(
             $output[0],
             0,
-            strpos($output[0], 'Viduc/Metromposer')
+            strpos($output[0], $search)
         );
 
         return str_replace(['vendor/', 'librairie/'], '', $vendor);
