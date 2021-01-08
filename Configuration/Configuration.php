@@ -142,7 +142,9 @@ class Configuration implements ConfigurationInterface
             strpos($output[0], $search)
         );
 
-        return str_replace(['vendor/', 'librairie/'], '', $vendor);
+        $path = str_replace(['vendor/', 'librairie/'], '', $vendor);
+
+        return $path . 'Metromposer/';
     }
 
     /**
