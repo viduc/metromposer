@@ -31,7 +31,7 @@ class MessageTest extends TestCase
         try {
             $this->message->getQuestion('none');
         } catch(MetromposerException $ex) {
-            self::assertEquals("L'id 666 n'existe pas", $ex->getMessage());
+            self::assertEquals("Le message none n'existe pas", $ex->getMessage());
         }
     }
 
