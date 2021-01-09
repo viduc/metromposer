@@ -33,7 +33,7 @@ class Composer implements ComposerInterface
      */
     final public function recupererLesVersions() : array
     {
-        $versions = [];
+        $versions = [];echo
         $files = scandir(
             $this->configuration->recupererPathLibrairie()
             . 'Composer'

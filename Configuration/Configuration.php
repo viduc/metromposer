@@ -145,7 +145,7 @@ class Configuration implements ConfigurationInterface
 
         $path = str_replace(['vendor/', 'librairie/'], '', $vendor);
 
-        return $path . 'metromposer/';
+        return $path . 'viduc/metromposer/';
     }
 
     /**
@@ -169,7 +169,7 @@ class Configuration implements ConfigurationInterface
      * @test testRecupererLaVersionDeLaLibrairie()
      */
     final public function recupererLaVersionDeLaLibrairie() : string
-    {echo $this->recupererPathLibrairie();
+    {
         try {
             $json = json_decode(
                 file_get_contents(
