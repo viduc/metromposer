@@ -7,7 +7,7 @@ use Viduc\Metromposer\Installation\Message;
 
 class MessageTest extends TestCase
 {
-    protected Message $message;
+    private Message $message;
 
     final protected function setUp() : void
     {

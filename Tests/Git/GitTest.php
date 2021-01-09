@@ -11,7 +11,7 @@ use Viduc\Metromposer\Git\Git;
 
 class GitTest extends TestCase
 {
-    protected Git $git;
+    protected $git;
 
     final protected function setUp() : void
     {
