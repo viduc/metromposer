@@ -8,13 +8,19 @@
 namespace Viduc\Metromposer\Composer;
 
 use Viduc\Metromposer\Configuration\Configuration;
+use Viduc\Metromposer\Configuration\ConfigurationInterface;
 use Viduc\Metromposer\Exception\MetromposerException;
 
 require_once('ComposerInterface.php');
 
 class Composer implements ComposerInterface
 {
-    private Configuration $configuration;
+    private ConfigurationInterface $configuration;
+
+    final public function setConfiguration(ConfigurationInterface $config) : void
+    {
+        $this->configuration = $config;
+    }
 
     public function __construct()
     {
@@ -56,7 +62,6 @@ class Composer implements ComposerInterface
         $output=null;
         $retval=null;
         $commande = 'cd ' . $this->configuration->recupererPathApplication() ;
-        //$commande = 'cd /var/www/blop; ';
         $commande .= 'php -d memory_limit=-1 ';
         $commande .= $this->configuration->recupererPathLibrairie();
         $commande .= 'Composer/composer-';

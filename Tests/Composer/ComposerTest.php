@@ -8,6 +8,7 @@ namespace Viduc\Metromposer\Tests\Composer;
 
 use PHPUnit\Framework\TestCase;
 use Viduc\Metromposer\Composer\Composer;
+use Viduc\Metromposer\Configuration\ConfigurationInterface;
 
 class ComposerTest extends TestCase
 {
@@ -26,6 +27,9 @@ class ComposerTest extends TestCase
 
     final public function testGenererLaListeDesLibrairiesAmettreAjour() : void
     {
+        $configuration = $this->createMock(ConfigurationInterface::class);
+        $configuration->method('recupereUnParametre')->willReturn('test');
+        $this->composer->setConfiguration($configuration);
         self::assertNull(
             $this->composer->genererLaListeDesLibrairiesAmettreAjour()
         );
