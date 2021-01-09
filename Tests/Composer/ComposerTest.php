@@ -13,7 +13,7 @@ use Viduc\Metromposer\Configuration\ConfigurationInterface;
 
 class ComposerTest extends TestCase
 {
-    protected Composer $composer;
+    protected $composer;
 
     final protected function setUp() : void
     {
