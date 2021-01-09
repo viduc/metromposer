@@ -27,9 +27,9 @@ class MessageTest extends TestCase
 
     final public function testGetQuestion() :void
     {
-        self::assertIsString($this->message->getQuestion(0));
+        self::assertIsString($this->message->getQuestion('git'));
         try {
-            $this->message->getQuestion(666);
+            $this->message->getQuestion('none');
         } catch(MetromposerException $ex) {
             self::assertEquals("L'id 666 n'existe pas", $ex->getMessage());
         }
