@@ -128,14 +128,13 @@ class Configuration implements ConfigurationInterface
      */
     final public function recupererPathApplication() : string
     {
-        $search = 'Viduc/Metromposer';
+        $search = 'viduc/metromposer';
         $output=null;
         $retval=null;
         $commande = 'pwd 2> /dev/null';
         exec($commande, $output, $retval);
-        var_dump($output[0]);
         if (strpos($output[0], $search) === false) {
-            $search = 'Metromposer';
+            $search = 'metromposer';
         }
         $vendor = substr(
             $output[0],
@@ -145,7 +144,7 @@ class Configuration implements ConfigurationInterface
 
         $path = str_replace(['vendor/', 'librairie/'], '', $vendor);
 
-        return $path . 'Metromposer/';
+        return $path . 'metromposer/';
     }
 
     /**
@@ -156,8 +155,8 @@ class Configuration implements ConfigurationInterface
     final public function recupererPathLibrairie() : string
     {
         $base = $this->recupererPathApplication();
-        if (is_dir($base . 'vendor/Viduc/Metromposer')) {
-            return $base . 'vendor/Viduc/Metromposer';
+        if (is_dir($base . 'vendor/viduc/metromposer')) {
+            return $base . 'vendor/viduc/metromposer';
         }
         return $base;
     }
