@@ -29,7 +29,9 @@ class ComposerTest extends TestCase
     final public function testGenererLaListeDesLibrairiesAmettreAjour() : void
     {
         $config = new Configuration();
-        mkdir($config->recupererPathApplication() . '/metromposer');
+        if (!is_dir($config->recupererPathApplication() . '/metromposer')) {
+            mkdir($config->recupererPathApplication() . '/metromposer');
+        }
         $configuration = $this->createMock(ConfigurationInterface::class);
         $configuration->method('recupereUnParametre')->willReturn('test');
         $this->composer->setConfiguration($configuration);
