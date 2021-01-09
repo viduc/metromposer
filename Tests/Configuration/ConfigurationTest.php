@@ -139,7 +139,7 @@ class ConfigurationTest extends TestCase
         if (!$vide) {
             file_put_contents(
                 FICHIER,
-                json_encode(['test' => '0.0.1'], JSON_THROW_ON_ERROR)
+                json_encode(['version' => '0.0.1'], JSON_THROW_ON_ERROR)
             );
         } else {
             fopen(FICHIER, 'ab');
