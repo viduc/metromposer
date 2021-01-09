@@ -133,6 +133,7 @@ class Configuration implements ConfigurationInterface
         $retval=null;
         $commande = 'pwd 2> /dev/null';
         exec($commande, $output, $retval);
+        echo $output[0];
         if (strpos($output[0], $search) === false) {
             $search = 'metromposer';
         }
