@@ -16,11 +16,11 @@ use PHPUnit\Framework\TestCase;
 
 class InstallationTest extends TestCase
 {
-    private $installation;
-    private $message;
-    private $git;
-    private $configuration;
-    private $composer;
+    protected Installation $installation;
+    protected MessageInterface $message;
+    protected GitInterface $git;
+    protected ConfigurationInterface $configuration;
+    protected ComposerInterface $composer;
 
     final protected function setUp() : void
     {

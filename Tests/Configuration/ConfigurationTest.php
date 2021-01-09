@@ -15,7 +15,7 @@ define('FICHIER', '../config.json');
 
 class ConfigurationTest extends TestCase
 {
-    protected $configuration;
+    protected Configuration $configuration;
 
     final protected function setUp() : void
     {
