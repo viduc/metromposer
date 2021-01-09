@@ -37,7 +37,7 @@ class Composer implements ComposerInterface
         $files = scandir(
             $this->configuration->recupererPathLibrairie()
             . 'Composer'
-        );var_dump($files);
+        );
         foreach ($files as $file) {
             if (strpos($file, 'composer-') === 0) {
                 $version = str_replace(
