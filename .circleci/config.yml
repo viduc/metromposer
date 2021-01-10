@@ -61,8 +61,13 @@ jobs:
       - run: chmod +x ./cc-test-reporter
       - run: sudo mkdir -p $CIRCLE_TEST_REPORTS/phpunit
       - run: ./cc-test-reporter before-build
-      - run: ./vendor/bin/phpunit --coverage-clover=clover.xml
-      - run: ./cc-test-reporter after-build -t clover --exit-code $?
+      - run:
+          name: "Run tests"
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+      - store_artifacts:
+          path: build/coverage-report
+      #- run: ./vendor/bin/phpunit --coverage-clover=clover.xml
+      #- run: ./cc-test-reporter after-build -t clover --exit-code $?
       #- run: ./vendor/bin/phpunit
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
