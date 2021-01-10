@@ -22,4 +22,3 @@ after_script:
   - cp clover.xml coverage.xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
