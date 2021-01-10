@@ -69,7 +69,7 @@ jobs:
           #path: build/coverage-report
           path: clover.xml
       #- run: ./vendor/bin/phpunit --coverage-clover=clover.xml
-      - run: ./cc-test-reporter after-build -t clover --exit-code $?
+      - run: ./cc-test-reporter after-build -t clover.xml --exit-code $?
       #- run: ./vendor/bin/phpunit
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
