@@ -137,6 +137,9 @@ class Configuration implements ConfigurationInterface
         if (strpos($output[0], $search) === false) {
             $search = 'metromposer';
         }
+        if (strpos($output[0], $search) === false) {
+            $search = 'project';
+        }
         $vendor = substr(
             $output[0],
             0,
@@ -144,7 +147,9 @@ class Configuration implements ConfigurationInterface
         );
 
         $path = str_replace(['vendor/', 'librairie/'], '', $vendor);
-
+        if ($search === 'project') {
+            return $path . 'project/';
+        }
         return $path . 'viduc/metromposer/';
     }
 
