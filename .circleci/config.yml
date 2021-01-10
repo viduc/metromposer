@@ -66,12 +66,12 @@ jobs:
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html reports/
       - run:
           name: "Run tests xml"
-          command: phpdbg -qrr vendor/bin/phpunit --coverage-clover = reports/clover.xml
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-clover=clover.xml
       - store_artifacts:
           path: reports/
           #path: clover.xml
       #- run: ./vendor/bin/phpunit --coverage-clover=clover.xml
-      - run: ./cc-test-reporter after-build -t reports/clover.xml --exit-code $?
+      - run: ./cc-test-reporter after-build -t clover.xml --exit-code $?
       #- run: ./vendor/bin/phpunit
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
