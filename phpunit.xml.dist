@@ -6,6 +6,9 @@
   <coverage processUncoveredFiles="true">
     <include>
       <directory suffix=".php">Composer</directory>
+      <directory suffix=".php">Configuration</directory>
+      <directory suffix=".php">GIt</directory>
+      <directory suffix=".php">Installation</directory>
     </include>
   </coverage>
   <php>
