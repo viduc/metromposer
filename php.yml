@@ -38,3 +38,4 @@ jobs:
         coverage: xdebug
         # Setup popular tools globally.
         tools: phpunit
+        
