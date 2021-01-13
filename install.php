@@ -15,12 +15,4 @@ require_once('Composer/Composer.php');
 require_once('Composer/ComposerInterface.php');
 
 $install = new Installation();
-try {
-    $install->installer();
-} catch (MetromposerException $e) {
-
-}
-
-
-
-
+$install->installer();
