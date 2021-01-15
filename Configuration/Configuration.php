@@ -50,7 +50,7 @@ class Configuration implements ConfigurationInterface
                         JSON_THROW_ON_ERROR
                     )
                 );
-            // @codeCoverageIgnoreStart
+                // @codeCoverageIgnoreStart
             } catch (JsonException $e) {
                 throw new MetromposerException($e->getMessage());
             }
@@ -129,20 +129,16 @@ class Configuration implements ConfigurationInterface
     final public function recupererPathApplication() : string
     {
         $search = 'viduc/metromposer';
-        $output=null;
-        $retval=null;
-        $commande = 'pwd 2> /dev/null';
-        exec($commande, $output, $retval);
-        if (strpos($output[0], $search) === false) {
+        if (strpos(__DIR__, $search) === false) {
             $search = 'metromposer';
         }
-        if (strpos($output[0], $search) === false) {
+        if (strpos(__DIR__, $search) === false) {
             $search = 'project';
         }
         $vendor = substr(
-            $output[0],
+            __DIR__,
             0,
-            strpos($output[0], $search)
+            strpos(__DIR__, $search)
         );
 
         $path = str_replace(['vendor/', 'librairie/'], '', $vendor);
@@ -152,7 +148,7 @@ class Configuration implements ConfigurationInterface
         if ($search === 'metromposer') {
             return $path . 'metromposer/';
         }
-        return $path . 'viduc/metromposer/';
+        return $path;
     }
 
     /**
@@ -180,12 +176,12 @@ class Configuration implements ConfigurationInterface
         try {
             $json = json_decode(
                 file_get_contents(
-                    $this->recupererPathLibrairie() . '/composer.json'
+                    $this->recupererPathLibrairie() . 'composer.json'
                 ),
                 false,
                 512,
                 JSON_THROW_ON_ERROR
-            );
+            );var_dump($json);
             if (isset($json->version)) {
                 return $json->version;
             }
