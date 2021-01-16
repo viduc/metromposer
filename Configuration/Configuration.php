@@ -159,8 +159,8 @@ class Configuration implements ConfigurationInterface
     final public function recupererPathLibrairie() : string
     {
         $base = $this->recupererPathApplication();
-        if (is_dir($base . 'vendor/viduc/metromposer')) {
-            return $base . 'vendor/viduc/metromposer';
+        if (is_dir($base . 'vendor/viduc/metromposer/')) {
+            return $base . 'vendor/viduc/metromposer/';
         }
         return $base;
     }
@@ -181,7 +181,7 @@ class Configuration implements ConfigurationInterface
                 false,
                 512,
                 JSON_THROW_ON_ERROR
-            );var_dump($json);
+            );
             if (isset($json->version)) {
                 return $json->version;
             }

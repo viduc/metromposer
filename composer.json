@@ -5,7 +5,7 @@
     "keywords": ["composer"],
     "homepage": "https://github.com/viduc",
     "license": "Apache-2.0",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "authors": [
         {
             "name": "Tristan Fleury",
@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "php": ">=7.3"
+        "php": ">=7.4",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",

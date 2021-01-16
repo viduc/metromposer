@@ -34,6 +34,9 @@ class ComposerTest extends TestCase
         }
         $configuration = $this->createMock(ConfigurationInterface::class);
         $configuration->method('recupereUnParametre')->willReturn('test');
+        $configuration->method('recupererPathApplication')->willReturn(
+            $config->recupererPathApplication()
+        );
         $this->composer->setConfiguration($configuration);
         self::assertNull(
             $this->composer->genererLaListeDesLibrairiesAmettreAjour()
