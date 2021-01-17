@@ -12,6 +12,7 @@ use RecursiveIteratorIterator;
 use Viduc\Metromposer\Exception\MetromposerException;
 
 require_once('ConfigurationInterface.php');
+define('DS', DIRECTORY_SEPARATOR);
 
 class Configuration implements ConfigurationInterface
 {
@@ -25,7 +26,7 @@ class Configuration implements ConfigurationInterface
     final public function __construct(string $fichier = null)
     {
         $this->fichier = $this->recupererPathApplication()
-            . 'metromposer/config.json';
+            . 'metromposer' . DS . 'config.json';
         if ($fichier) {
             $this->fichier = $fichier;
         }
@@ -128,7 +129,7 @@ class Configuration implements ConfigurationInterface
      */
     final public function recupererPathApplication() : string
     {
-        $search = 'viduc/metromposer';
+        $search = 'viduc' . DS . 'metromposer';
         if (strpos(__DIR__, $search) === false) {
             $search = 'metromposer';
         }
@@ -141,12 +142,16 @@ class Configuration implements ConfigurationInterface
             strpos(__DIR__, $search)
         );
 
-        $path = str_replace(['vendor/', 'librairie/'], '', $vendor);
+        $path = str_replace(
+            ['vendor'. DS, 'librairie' . DS],
+            '',
+            $vendor
+        );
         if ($search === 'project') {
-            return $path . 'project/';
+            return $path . 'project' . DS;
         }
         if ($search === 'metromposer') {
-            return $path . 'metromposer/';
+            return $path . 'metromposer' . DS;
         }
         return $path;
     }
@@ -159,8 +164,8 @@ class Configuration implements ConfigurationInterface
     final public function recupererPathLibrairie() : string
     {
         $base = $this->recupererPathApplication();
-        if (is_dir($base . 'vendor/viduc/metromposer/')) {
-            return $base . 'vendor/viduc/metromposer/';
+        if (is_dir($base . 'vendor' . DS . 'viduc' . DS . 'metromposer' . DS)) {
+            return $base . 'vendor' . DS . 'viduc' . DS . 'metromposer' . DS;
         }
         return $base;
     }

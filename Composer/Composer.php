@@ -64,7 +64,7 @@ class Composer implements ComposerInterface
         $commande = 'cd ' . $this->configuration->recupererPathApplication() ;
         $commande .= 'php -d memory_limit=-1 ';
         $commande .= $this->configuration->recupererPathLibrairie();
-        $commande .= 'Composer/composer-';
+        $commande .= 'Composer' . DS . 'composer-';
         $commande .= $this->configuration->recupereUnParametre('composer');
         $commande .= '.phar outdated 2> /dev/null';
 
@@ -110,7 +110,7 @@ class Composer implements ComposerInterface
         $html .= '</body></html>';
         file_put_contents(
             $this->configuration->recupererPathApplication() .
-            'metromposer/' .
+            'metromposer' . DS .
             $this->configuration->recupereUnParametre('application') . '.html',
             $html
         );

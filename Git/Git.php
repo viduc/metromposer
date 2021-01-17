@@ -61,7 +61,7 @@ class Git implements GitInterface
         $retval=null;
         $commande = 'git clone ' . $this->urlServeur . ' ';
         $commande .= $this->configuration->recupererPathApplication();
-        $commande .= '/metromposer 2> /dev/null';
+        $commande .= DS . 'metromposer 2> /dev/null';
         exec($commande, $output, $retval);
 
         return $retval === 0;
@@ -75,7 +75,7 @@ class Git implements GitInterface
     final public function envoyerLeRapport() : void
     {
         $commande = 'cd ' . $this->configuration->recupererPathApplication() ;
-        $commande .= '/metromposer; git add ';
+        $commande .= DS .'metromposer; git add ';
         $commande .= $this->configuration->recupereUnParametre('application');
         $commande .= '.html; ';
         $commande .= 'git commit  -m "maj"; git push 2> /dev/null';

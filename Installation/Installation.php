@@ -103,7 +103,7 @@ class Installation implements InstallationInterface
     {
         return is_dir(
             $this->configuration->recupererPathApplication()
-            . '/metromposer'
+            . DS . 'metromposer'
         );
     }
 
@@ -125,7 +125,7 @@ class Installation implements InstallationInterface
         }
         // @codeCoverageIgnoreEnd
         $this->configuration->supprimerDossier(
-            $this->configuration->recupererPathApplication(). '/metromposer'
+            $this->configuration->recupererPathApplication() . DS . 'metromposer'
         );
     }
 
