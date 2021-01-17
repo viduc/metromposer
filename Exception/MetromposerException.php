@@ -8,6 +8,11 @@ namespace Viduc\Metromposer\Exception;
 
 use Exception;
 
+/**
+ * Class MetromposerException
+ * @package Viduc\Metromposer\Exception
+ * @codeCoverageIgnore
+ */
 class MetromposerException extends Exception
 {
 

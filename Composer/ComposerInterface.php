@@ -8,6 +8,11 @@ namespace Viduc\Metromposer\Composer;
 
 use Viduc\Metromposer\Exception\MetromposerException;
 
+/**
+ * Interface ComposerInterface
+ * @package Viduc\Metromposer\Composer
+ * @codeCoverageIgnore
+ */
 interface ComposerInterface
 {
     /**

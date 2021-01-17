@@ -8,6 +8,11 @@ namespace Viduc\Metromposer\Git;
 
 use Viduc\Metromposer\Exception\MetromposerException;
 
+/**
+ * Interface GitInterface
+ * @package Viduc\Metromposer\Git
+ * @codeCoverageIgnore
+ */
 interface GitInterface
 {
     /**

@@ -8,6 +8,11 @@ namespace Viduc\Metromposer\Installation;
 
 use Viduc\Metromposer\Exception\MetromposerException;
 
+/**
+ * Interface InstallationInterface
+ * @package Viduc\Metromposer\Installation
+ * @codeCoverageIgnore
+ */
 interface InstallationInterface
 {
     /**
