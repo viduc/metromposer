@@ -4,6 +4,7 @@
 /*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
 /*                              Licence: Apache-2.0                           */
 /******************************************************************************/
+
 namespace Viduc\Metromposer\Installation;
 
 use Viduc\Metromposer\Configuration\Configuration;

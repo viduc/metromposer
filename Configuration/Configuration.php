@@ -131,10 +131,14 @@ class Configuration implements ConfigurationInterface
     {
         $search = 'viduc' . DS . 'metromposer';
         if (strpos(__DIR__, $search) === false) {
+            // @codeCoverageIgnoreStart
             $search = 'metromposer';
+            // @codeCoverageIgnoreEnd
         }
         if (strpos(__DIR__, $search) === false) {
+            // @codeCoverageIgnoreStart
             $search = 'project';
+            // @codeCoverageIgnoreEnd
         }
         $vendor = substr(
             __DIR__,
@@ -143,15 +147,17 @@ class Configuration implements ConfigurationInterface
         );
         if (strpos($vendor, 'vendor') !== false ||
             strpos($vendor, 'librairie') !== false ) {
+            // @codeCoverageIgnoreStart
             $path = str_replace(
                 ['vendor'. DS, 'librairie' . DS],
                 '',
                 $vendor
             );
+            // @codeCoverageIgnoreEnd
         } else {
             return $vendor . DS . 'viduc' . DS . 'metromposer' . DS;
         }
-
+        // @codeCoverageIgnoreStart
         if ($search === 'project') {
             return $path . 'project' . DS;
         }
@@ -159,6 +165,7 @@ class Configuration implements ConfigurationInterface
             return $path . 'metromposer' . DS;
         }
         return $path;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -170,7 +177,9 @@ class Configuration implements ConfigurationInterface
     {
         $base = $this->recupererPathApplication();
         if (is_dir($base . 'vendor' . DS . 'viduc' . DS . 'metromposer' . DS)) {
+            // @codeCoverageIgnoreStart
             return $base . 'vendor' . DS . 'viduc' . DS . 'metromposer' . DS;
+            // @codeCoverageIgnoreEnd
         }
         return $base;
     }
@@ -200,11 +209,12 @@ class Configuration implements ConfigurationInterface
                 'La version de la librairie n\' existe pas'
             );
             // @codeCoverageIgnoreEnd
+        // @codeCoverageIgnoreStart
         } catch (JsonException $e) {
             throw new MetromposerException(
                 'Erreur JSON lors de la lecture du fichier composer.json'
             );
-        }
+        }// @codeCoverageIgnoreEnd
     }
 
     /**
@@ -268,7 +278,9 @@ class Configuration implements ConfigurationInterface
         $chaine = preg_replace('#[^0-9a-z]+#i', '', $chaine);
         while(strpos($chaine, '--') !== false)
         {
+            // @codeCoverageIgnoreStart
             $chaine = str_replace('--', '-', $chaine);
+            // @codeCoverageIgnoreEnd
         }
         $chaine = trim($chaine, '');
 

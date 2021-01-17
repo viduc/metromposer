@@ -1,4 +1,10 @@
-<?php
+<?php declare(strict_types=1);
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
+
 namespace Viduc\Metromposer\Installation;
 
 use Viduc\Metromposer\Exception\MetromposerException;
@@ -34,6 +40,10 @@ interface MessageInterface
      */
     function getReponse() : string;
 
+    /**
+     * Affiche le message d'erreur
+     * @param string $message
+     * @codeCoverageIgnore
+     */
     function afficherErreur(string $message) : void;
-
 }

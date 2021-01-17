@@ -102,7 +102,9 @@ class Composer implements ComposerInterface
         $html .= '<th scope="col">Commentaire</th>';
         $html .= '</tr></thead>';
         foreach ($output as $ligne) {
+            // @codeCoverageIgnoreStart
             $html .= $this->formaterLigneComposer($ligne);
+            // @codeCoverageIgnoreEnd
         }
         $html .= '</table></div></div>';
         $html .= '<script>$(document).ready(function() ';
@@ -132,7 +134,9 @@ class Composer implements ComposerInterface
         if (isset($tabLigne[0]) && strpos($tabLigne[0], '/')) {
             $retour .= '<tr>';
             if ($tabLigne[2] === '!') {
+                // @codeCoverageIgnoreStart
                 $retour .= '<td>MIN</td>';
+                // @codeCoverageIgnoreEnd
             } else {
                 $retour .= '<td>MAJ</td>';
             }
@@ -140,7 +144,9 @@ class Composer implements ComposerInterface
             $retour .= '<td style="width: 10%">' . $tabLigne[1] . ' -> ' . $tabLigne[3] . '</td>';
             $commentaire = '';
             for ($i = 4, $iMax = count($tabLigne); $i < $iMax; $i++) {
+                // @codeCoverageIgnoreStart
                 $commentaire .= $tabLigne[$i] . ' ';
+                // @codeCoverageIgnoreEnd
             }
             $retour .= '<td>' . $commentaire . '</td>';
             $retour .= '</tr>';

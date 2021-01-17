@@ -1,5 +1,9 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
+/******************************************************************************/
+/*                                  METROMPOSER                               */
+/*     Auteur: Tristan Fleury - https://github.com/viduc - viduc@mail.fr      */
+/*                              Licence: Apache-2.0                           */
+/******************************************************************************/
 
 namespace Viduc\Metromposer\Installation;
 
@@ -119,6 +123,11 @@ class Message implements MessageInterface
         return $reponse;
     }
 
+    /**
+     * Affiche le message d'erreur
+     * @param string $message
+     * @codeCoverageIgnore
+     */
     final public function afficherErreur(string $message): void
     {
         echo COULEUR_ERREUR . '\n' . $message . FIN_COULEUR_ERREUR;
