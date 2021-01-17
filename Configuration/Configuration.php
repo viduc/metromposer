@@ -149,7 +149,7 @@ class Configuration implements ConfigurationInterface
                 $vendor
             );
         } else {
-            return $vendor . DS . 'viduc' . DS . 'metromposer';
+            return $vendor . DS . 'viduc' . DS . 'metromposer' . DS;
         }
 
         if ($search === 'project') {
