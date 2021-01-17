@@ -11,7 +11,6 @@ use Viduc\Metromposer\Exception\MetromposerException;
 /**
  * Interface ComposerInterface
  * @package Viduc\Metromposer\Composer
- * @codeCoverageIgnore
  */
 interface ComposerInterface
 {
@@ -19,12 +18,14 @@ interface ComposerInterface
      * Récupère les versions des fichiers phar disponibles
      * @return array
      * @test testRecupererLesVersions()
+     * @codeCoverageIgnore
      */
     function recupererLesVersions() : array;
 
     /**
      * Génère le fichier des librairies à mettre à jour
      * @throws MetromposerException
+     * @codeCoverageIgnore
      */
     function genererLaListeDesLibrairiesAmettreAjour() : void;
 
@@ -33,6 +34,7 @@ interface ComposerInterface
      * @param string $ligne
      * @return string
      * @test testFormaterLigneComposer()
+     * @codeCoverageIgnore
      */
     function formaterLigneComposer(string $ligne) : string;
 }

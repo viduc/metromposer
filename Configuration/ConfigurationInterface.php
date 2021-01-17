@@ -11,7 +11,6 @@ use Viduc\Metromposer\Exception\MetromposerException;
 /**
  * Interface ConfigurationInterface
  * @package Viduc\Metromposer\Configuration
- * @codeCoverageIgnore
  */
 interface ConfigurationInterface
 {
@@ -19,6 +18,7 @@ interface ConfigurationInterface
      * Créer le fichier de configuration
      * @throws MetromposerException
      * @test testCreerLeFichier()
+     * @codeCoverageIgnore
      */
     function creerLeFichier() : void;
 
@@ -29,6 +29,7 @@ interface ConfigurationInterface
      * @return void
      * @throws MetromposerException
      * @test testAjouterOuModifierUnParametre()
+     * @codeCoverageIgnore
      */
     function ajouterOuModifierUnParametre(string $parametre, string $value) : void;
 
@@ -38,6 +39,7 @@ interface ConfigurationInterface
      * @return string - la valeur du paramètre
      * @throws MetromposerException
      * @test testRecupereUnParametre()
+     * @codeCoverageIgnore
      */
     function recupereUnParametre(string $parametre) : string;
 
@@ -45,6 +47,7 @@ interface ConfigurationInterface
      * Récupère le path complet de l'application
      * @return string
      * @test testRecupererPathApplication()
+     * @codeCoverageIgnore
      */
     function recupererPathApplication() : string;
 
@@ -52,6 +55,7 @@ interface ConfigurationInterface
      * Récupère le path complet de la librairie
      * @return string
      * @test testRecupererPathLibrairie()
+     * @codeCoverageIgnore
      */
     function recupererPathLibrairie() : string;
 
@@ -60,6 +64,7 @@ interface ConfigurationInterface
      * @return string
      * @throws MetromposerException
      * @test testRecupererLaVersionDeLaLibrairie()
+     * @codeCoverageIgnore
      */
     function recupererLaVersionDeLaLibrairie() : string;
 
@@ -67,6 +72,7 @@ interface ConfigurationInterface
      * Enregistre le nom du serveur
      * @throws MetromposerException
      * @test testEnregistrerLeNomDuServeur()
+     * @codeCoverageIgnore
      */
     function enregistrerLeNomDuServeur() : void;
 
@@ -74,6 +80,7 @@ interface ConfigurationInterface
      * Enregistre la date de l'installation
      * @throws MetromposerException
      * @test testDateDinstallation()
+     * @codeCoverageIgnore
      */
     function dateDinstallation() : void;
 
@@ -89,6 +96,7 @@ interface ConfigurationInterface
      * @param string $chaine
      * @return string
      * @test testRemplacerCaracteresSpeciaux()
+     * @codeCoverageIgnore
      */
     function remplacerCaracteresSpeciaux(string $chaine) : string;
 

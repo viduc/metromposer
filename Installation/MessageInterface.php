@@ -12,7 +12,6 @@ use Viduc\Metromposer\Exception\MetromposerException;
 /**
  * Interface MessageInterface
  * @package Viduc\Metromposer\Installation
- * @codeCoverageIgnore
  */
 interface MessageInterface
 {
@@ -20,6 +19,7 @@ interface MessageInterface
      * Retourne l'en-tête affiché en début de script
      * @return string
      * @test testGetEntete()
+     * @codeCoverageIgnore
      */
     function getEntete() : string;
 
@@ -27,6 +27,7 @@ interface MessageInterface
      * Retourne le tableau de questions
      * @return array
      * @test testGetQuestions()
+     * @codeCoverageIgnore
      */
     function getQuestions() : array;
 
@@ -36,6 +37,7 @@ interface MessageInterface
      * @return string
      * @throws MetromposerException
      * @test testGetQuestion()
+     * @codeCoverageIgnore
      */
     function getQuestion(string $name): string;
 

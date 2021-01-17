@@ -11,7 +11,6 @@ use Viduc\Metromposer\Exception\MetromposerException;
 /**
  * Interface InstallationInterface
  * @package Viduc\Metromposer\Installation
- * @codeCoverageIgnore
  */
 interface InstallationInterface
 {
@@ -25,6 +24,7 @@ interface InstallationInterface
      * vérifie si une installation a déjà été faite
      * @return bool
      * @test testVerifierInstallation()
+     * @codeCoverageIgnore
      */
     function verifierInstallation() : bool;
 
@@ -32,6 +32,7 @@ interface InstallationInterface
      * Relance l'installation en supprimant le dossier metromposer
      * @throws MetromposerException
      * @test testRelancerInstallation()
+     * @codeCoverageIgnore
      */
     function relancerInstallation() : void;
 
@@ -40,6 +41,7 @@ interface InstallationInterface
      * @param bool error - détermine si on a eu une erreur lors de la
      * récupération du dépôt. Si vraie message git_error
      * @throws MetromposerException
+     * @codeCoverageIgnore
      */
     function depotGit(bool $error) : void;
 
@@ -47,6 +49,7 @@ interface InstallationInterface
      * Enregsitre la version du fichier phar à utiliser
      * @throws MetromposerException
      * @test testComposerPhar()
+     * @codeCoverageIgnore
      */
     function composerPhar() : void;
 
@@ -54,6 +57,7 @@ interface InstallationInterface
      * Enregistre le nom de l'application
      * @throws MetromposerException
      * @test testNomDeLapplication()
+     * @codeCoverageIgnore
      */
     function nomDeLapplication() : void;
 
@@ -61,6 +65,7 @@ interface InstallationInterface
      * Enregistre l'url de l'application
      * @throws MetromposerException
      * @test testLienDeLapplication()
+     * @codeCoverageIgnore
      */
     function lienDeLapplication() : void;
 
@@ -68,6 +73,7 @@ interface InstallationInterface
      * Génère le rapport html
      * @throws MetromposerException
      * @test testGenererLeRapport()
+     * @codeCoverageIgnore
      */
     function genererLeRapport() : void;
 
@@ -75,6 +81,7 @@ interface InstallationInterface
      * Envoie le rapport sur le dépôt git
      * @throws MetromposerException
      * @test testEnvoyerLeRapport();
+     * @codeCoverageIgnore
      */
     function envoyerLeRapport() : void;
 

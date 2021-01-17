@@ -11,7 +11,6 @@ use Viduc\Metromposer\Exception\MetromposerException;
 /**
  * Interface GitInterface
  * @package Viduc\Metromposer\Git
- * @codeCoverageIgnore
  */
 interface GitInterface
 {
@@ -26,6 +25,7 @@ interface GitInterface
      * Vérifie si le dépot git est accessible
      * @return bool
      * @test testVerifierSiLeDepotEstAccessible()
+     * @codeCoverageIgnore
      */
     function verifierSiLeDepotEstAccessible() : bool;
 
@@ -33,6 +33,7 @@ interface GitInterface
      * Clone le dépot
      * @return bool
      * @test testClonerLeDepot()
+     * @codeCoverageIgnore
      */
     function clonerLeDepot() : bool;
 
