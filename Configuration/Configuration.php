@@ -141,12 +141,17 @@ class Configuration implements ConfigurationInterface
             0,
             strpos(__DIR__, $search)
         );
+        if (strpos($vendor, 'vendor') !== false ||
+            strpos($vendor, 'librairie') !== false ) {
+            $path = str_replace(
+                ['vendor'. DS, 'librairie' . DS],
+                '',
+                $vendor
+            );
+        } else {
+            return $vendor . DS . 'viduc' . DS . 'metromposer';
+        }
 
-        $path = str_replace(
-            ['vendor'. DS, 'librairie' . DS],
-            '',
-            $vendor
-        );
         if ($search === 'project') {
             return $path . 'project' . DS;
         }
