@@ -51,7 +51,7 @@ L'installation de la librairie se fait via composer:
 CONFIGURATION
 -------------
 
-##### Phase d'installation:
+#### Phase d'installation:
 
 Un script d'installation est fournit. Ouvrez une console pouis placez vous à la
 racine de votre application. Exécutez ensuite cette commande:
@@ -99,3 +99,49 @@ Le script vous indiquera que l'installation est terminée.
 
 A tout moment vous pouvez annuler l'installation en entrant :q
 
+#### Phase de réinstallation:
+Il est possible de relancer le script d'installation si vous souhaitez modifier
+la configuration. Le script détectera qu'une configuration est présente et vous
+proposera de la supprimer et de recommencer l'installation. Entrez oui pour lancer
+le processus ou non pour arrêter:
+
+![url](Ressources/Images/readme/07.png)
+
+EXECUTION
+-------------
+Vous pouvez lancer le script directement en éxécutant le fichier metromposer.php
+ed la librairie:
+
+![url](Ressources/Images/readme/08.png)
+
+Il est consillé de lancer le script automatiquement en configurant une tâche
+cron de votre serveur.
+
+JENKINS
+-------------
+La dernière étape consiste donc à paramètrer jenkins. créer un job from scratch
+sur votre serveur. Configurer votre Gestion de code source pour si possiblequ'il
+se déclenche si possible lors des push sur la branch de votre dépôt:
+
+![url](Ressources/Images/readme/09.png)
+
+Ajouter ensuite une action du type "Publish HTML reports" à la suite du build:
+
+![url](Ressources/Images/readme/10.png)
+
+Relancer un job (directement ou via un push), vous devriez obtenir votre premier
+rapport:
+
+![url](Ressources/Images/readme/11.png)
+![url](Ressources/Images/readme/12.png)
+
+Chaque application qui enverra son rapport sur votre dépôt viendra s'ajouter à 
+la liste des rapports disponibles (dans la barre d'onglet)
+
+![url](Ressources/Images/readme/13.png)
+
+CONTRIBUTION
+-------------
+
+Cette librairie est développée par Tristan FLeury alias Viduc. N'hésitez pas à
+me faire vos retours et suggestions et à me proposer vos améliorations.

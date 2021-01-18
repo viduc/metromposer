@@ -15,4 +15,4 @@ $composer = new Composer();
 $composer->genererLaListeDesLibrairiesAmettreAjour();
 
 $git = new Git();
-//$git->envoyerLeRapport();
+$git->envoyerLeRapport();
